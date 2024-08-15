@@ -1,10 +1,11 @@
 import os
-import random
 import time
+
 import torch
 import torch.nn as nn
-from torchvision import transforms
 from PIL import Image
+from torchvision import transforms
+
 
 # Define the CNN architecture
 class CNN(nn.Module):
@@ -26,9 +27,10 @@ class CNN(nn.Module):
         x = self.fc2(x)
         return x
 
+
 # Load the trained model
 model = CNN()
-model.load_state_dict(torch.load('rotate_model.pth'))
+model.load_state_dict(torch.load('rotate_model_1.pth'))
 model.eval()
 
 # Define transformations for input images
@@ -36,6 +38,7 @@ transform = transforms.Compose([
     transforms.Resize((40, 40)),
     transforms.ToTensor(),
 ])
+
 
 # Function to predict rotation angle
 def predict_rotation_angle(image_path, model, transform):
@@ -50,15 +53,12 @@ def predict_rotation_angle(image_path, model, transform):
         predicted_angle = predicted.item()  # Get the predicted angle
     return predicted_angle
 
-if __name__ == '__main__':
-    
-    for name in random.sample(os.listdir("360"), 10):
 
-        image_path = f'360/{name}'
-        angle = image_path.split("_")[2].split(".")[0]
-        
+if __name__ == '__main__':
+    for name in os.listdir("test"):
+        image_path = f'test/{name}'
+        angle = image_path.split("_")[0].split(".")[0]
         # Predict rotation angle
         ts = time.time()
         predicted_angle = predict_rotation_angle(image_path, model, transform)
-        print("路径：", image_path,", 真实角度：" , angle,", 预测角度:", predicted_angle, "耗时：",time.time()-ts)
-    
+        print("路径：", image_path, ", 真实角度：", angle, ", 预测角度:", predicted_angle, "耗时：", time.time() - ts)

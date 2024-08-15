@@ -27,7 +27,7 @@ class ImageRotatorApp:
                 self.image_index = int(max(keys))+1
 
         # Load images
-        self.image1 = Image.open(f"{labels_path}/bg_{self.image_index}.png")
+        self.image1 = Image.open(f"{labels_path}/bg_1.png")
         self.image2 = Image.open(f"{labels_path}/center_{self.image_index}.png")
         self.image1_tk = ImageTk.PhotoImage(self.image1)
         self.image2_tk = ImageTk.PhotoImage(self.image2)
@@ -122,12 +122,13 @@ class ImageRotatorApp:
         # Change images
         self.commit_angle()
         self.image_index += 1
-        if not os.path.exists(f"{self.labels_path}/bg_{self.image_index}.png") or not os.path.exists(f"{self.labels_path}/center_{self.image_index}.png"):
+        if not os.path.exists(f"{self.labels_path}/bg_1.png") or not os.path.exists(f"{self.labels_path}/center_{self.image_index}.png"):
             tk.messagebox.showinfo("提示", "文件未找到或者已经标注结束")
             return
         
         self.master.title(f"{self.title} - {self.image_index} / {self.all_image_index}")
-        self.image1 = Image.open(f"{self.labels_path}/bg_{self.image_index}.png")
+        # self.image1 = Image.open(f"{self.labels_path}/bg_{self.image_index}.png")
+        self.image1 = Image.open(f"{self.labels_path}/bg_1.png")
         self.image2 = Image.open(f"{self.labels_path}/center_{self.image_index}.png")
 
         self.image1_tk = ImageTk.PhotoImage(self.image1)

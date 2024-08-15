@@ -66,7 +66,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-num_epochs = 100
+num_epochs = 200
 for epoch in range(num_epochs):
     running_loss = 0.0
     for i, data in enumerate(dataloader, 0):
@@ -91,4 +91,4 @@ for epoch in range(num_epochs):
 print('Finished Training')
 
 # Save the model
-torch.save(model.state_dict(), 'rotate_model.pth')
+torch.save(model.state_dict(), 'rotate_model_1.pth')
